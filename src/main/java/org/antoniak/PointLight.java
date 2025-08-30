@@ -10,15 +10,28 @@ public class PointLight implements Light {
     }
 
     @Override
-    public double calcIntensity(Vec3D surfaceNormal, Vec3D point) {
+    public double calcIntensity(Scene s, Vec3D surfaceNormal, Vec3D point, Vec3D cameraToPoint, double specular) {
         var lightRayToPosition = position.subtract(point);
+        var closestObject = s.getClosestSphere(point, lightRayToPosition, 0.001, 1.0);
+        if (closestObject != null)
+            return 0.0;
+
         double dot = surfaceNormal.dot(lightRayToPosition);
+        double i = 0.0;
 
         if (dot > 0) {
             // 1.0 - surfaceNormal length, it's assumed its length is 1.0
-            return intensity * dot / (1.0 * lightRayToPosition.length());
+            i = intensity * dot / (1.0 * lightRayToPosition.length());
         }
 
-        return 0.0;
+        if (specular > 0) {
+            Vec3D R = surfaceNormal.multiply(2.0).multiply(dot).subtract(lightRayToPosition);
+            double r_dot_v = R.dot(cameraToPoint);
+            if (r_dot_v > 0) {
+                i += i * Math.pow(r_dot_v / (R.length() * cameraToPoint.length()), specular);
+            }
+        }
+
+        return i;
     }
 }
