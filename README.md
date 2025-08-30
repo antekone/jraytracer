@@ -2,8 +2,8 @@
 
 Everyone needs to write a raytracer, right?
 
-So this is a simple real-time raytracer written in Java with a Swing-based interactive UI. Move the camera with WASD,
-zoom with = and -, and quit with Q or ESC. The scene features 8 colored spheres arranged in a circle, a ground plane, 
+So this is a simple real-time raytracer written in Java with a Swing-based interactive UI. It's CPU-only, doesn't use OpenGL, and doesn't use GPU acceleration. Move the camera with WASD,
+zoom with = and -, and quit with Q or ESC. The scene features 5 colored spheres arranged in a circle, a ground plane, 
 and multiple light sources (point, directional, and ambient).
 
 The project is just a prototype, and doesn't do proper double buffering. That's why there can be some artifacts
