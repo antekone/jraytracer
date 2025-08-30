@@ -39,3 +39,7 @@ Tested only on Linux X11 + KDE.
 
 ## License
 Public domain.
+
+## Credits
+
+Gabriel Gambetta (https://gabrielgambetta.com)
